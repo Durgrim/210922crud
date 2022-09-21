@@ -7,5 +7,5 @@ kernel:
     type: annotation
 
 catalog:
-    path: /
+    path: /catalog/
     controller: App\Controller\CatalogController::index
