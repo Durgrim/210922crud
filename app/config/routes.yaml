@@ -6,6 +6,23 @@ kernel:
     resource: ../src/Kernel.php
     type: annotation
 
-catalog:
-    path: /
+getProducts:
+    path: /catalog
     controller: App\Controller\ProductController::getProducts
+
+showProduct:
+    path: /catalog/product/{id}
+    controller: App\Controller\ProductController::showProduct
+
+createProduct:
+    path: /catalog/createProduct
+    controller: App\Controller\ProductController::createProduct
+    
+
+updateProduct:
+    path: /catalog/updateProduct/{id}
+    controller: App\Controller\ProductController::updateProduct
+
+deleteProduct:
+    path: /catalog/deleteProduct/{id}
+    controller: App\Controller\ProductController::deleteProduct

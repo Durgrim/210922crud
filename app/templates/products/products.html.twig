@@ -6,6 +6,7 @@
 
 {% block body %}
     <h1>Products list</h1>
+     <a href="{{ path('createProduct') }}" class="btn btn-primary">Create Product</a>
     <table>
         <thead>
             <tr>
@@ -14,7 +15,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Weight</th>
-                {# <th>enabled</th> #}
+                <th>Enabled</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,11 +27,14 @@
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.weight }}</td>
-                    {# <td>{{ loop.enabled }}</td> #}
-                    <td>
-                        <a href='#' class="btn btn-primary">Modificar</a>
-                        <a href='#' class="btn btn-danger">Eliminar</a>
-                    </td>
+                    <td>{{ product.enabled }}</td>
+                    {% if product.enabled %}
+                        <td>
+                            <a href='{{ path('showProduct', {'id': product.uuid}) }}' class="btn btn-primary">See product information</a>
+                            <a href='{{ path('updateProduct', {'id': product.uuid}) }}' class="btn btn-warning">Modify</a>
+                            <a href='{{ path('deleteProduct', {'id': product.uuid}) }}' class="btn btn-danger">Delete</a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>

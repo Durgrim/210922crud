@@ -1,0 +1,25 @@
+{% extends('base.html.twig') %}
+
+{% block title %}
+    <title>Product update</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Product update</h1>
+    {{ form_start(formProduct) }}
+        <div class="form-group col-lg-4">
+            {{ form_row(formProduct.productType)}}
+        </div>
+        <div class="form-group col-lg-4">
+            {{ form_row(formProduct.name)}}
+        </div>
+        <div class="form-group col-lg-4">
+            {{ form_row(formProduct.description)}}
+        </div>
+        <div class="form-group col-lg-4">
+            {{ form_row(formProduct.weight)}}
+        </div>
+
+        {{ form_row(formProduct.submit)}}<a href="{{ path('getProducts') }}" class="btn btn-warning">Cancel</a>
+    {{ form_end(formProduct) }}
+{% endblock %}
