@@ -5,5 +5,34 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Hello world</h1>
+    <h1>Products list</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Product Type</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Weight</th>
+                {# <th>enabled</th> #}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in listProducts %}
+                <tr>
+                    <td>{{ product.uuid }}</td>
+                    <td>{{ product.productType }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.weight }}</td>
+                    {# <td>{{ loop.enabled }}</td> #}
+                    <td>
+                        <a href='#' class="btn btn-primary">Modificar</a>
+                        <a href='#' class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
