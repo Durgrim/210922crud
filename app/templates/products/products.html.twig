@@ -15,9 +15,20 @@
             {{ message }}
         </div>
     {% endfor %}
+    
     <h1>Products list</h1>
-    <a href="{{ path('createProduct') }}" class="btn btn-primary">Create Product</a>
-    <input class="form-control " id="search" type="text">
+
+    <div>
+        <a href="{{ path('createProduct') }}" class="btn btn-primary">Create Product</a>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
+        </div>
+        <input type="text" class="form-control" id="search" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+
     <table>
         <thead>
             <tr>

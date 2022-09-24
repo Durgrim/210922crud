@@ -20,7 +20,7 @@
             {{ form_label(formProduct.weight) }}
             {{ form_widget(formProduct.weight) }}
             {% if form_errors(formProduct.weight)|length > 0 %}
-                <div class="alert alert-danger">
+                <div class="alert alert-danger m-2">
                     {{ form_errors(formProduct.weight) }}
                 </div>
             {% endif %}

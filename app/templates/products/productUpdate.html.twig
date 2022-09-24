@@ -1,11 +1,11 @@
 {% extends('base.html.twig') %}
 
 {% block title %}
-    <title>Product {{ formProduct.getUuid() }} update</title>
+    <title>Product {{ product.uuid }} update</title>
 {% endblock %}
 
 {% block body %}
-    <h1>Product { id } update</h1>
+    <h1>Product {{ product.uuid }} update</h1>
     {{ form_start(formProduct) }}
         <div class="form-group col-lg-4">
             {{ form_row(formProduct.productType)}}

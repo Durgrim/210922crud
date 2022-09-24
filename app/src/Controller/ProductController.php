@@ -76,6 +76,7 @@ class ProductController extends AbstractController {
             }
             return $this->render('products/productUpdate.html.twig', [
                 'formProduct' => $formProduct->createView(),
+                'product' => $product,
             ]);
         }
     }
@@ -92,6 +93,5 @@ class ProductController extends AbstractController {
             $this->addFlash('success', 'The product had been deleted');
             return $this->redirectToRoute('getProducts');
         }
-
     }
 }
