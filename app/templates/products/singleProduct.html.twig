@@ -1,11 +1,11 @@
 {% extends('base.html.twig') %}
 
 {% block title %}
-    <title>Product information</title>
+    <title>Product {{ product.uuid }} information</title>
 {% endblock %}
 
 {% block body %}
-    <h1>Product information</h1>
+    <h1>Product {{ product.uuid }} information</h1>
      <a href="{{ path('getProducts') }}" class="btn btn-primary">Show all products</a>
     <table>
         <thead>
@@ -27,6 +27,19 @@
                 <td>{{ product.description }}</td>
                 <td>{{ product.weight }}</td>
                 <td>{{ product.enabled }}</td>
+                {% if product.enabled %}
+                    <td>
+                        <a href='{{ path('updateProduct', {'id': product.uuid}) }}' class="btn btn-warning">Modify</a>
+                        <a href='{{ path('deleteProduct', {'id': product.uuid}) }}' class="btn btn-danger">Delete</a>
+                    </td>
+                {% endif %}
+                {% if product.enabled == 0 %}
+                    <td>
+                        <a href='{{ path('updateProduct', {'id': product.uuid}) }}' class="btn btn-secondary disabled">Modify</a>
+                        <a href='{{ path('deleteProduct', {'id': product.uuid}) }}' class="btn btn-danger">Delete</a>
+                    </td>
+                {% endif %}
+                </tr>
             </tr>
         </tbody>
     </table>

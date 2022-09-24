@@ -6,18 +6,25 @@ kernel:
     resource: ../src/Kernel.php
     type: annotation
 
-getProducts:
-    path: /catalog
+main:
+    path: /
     controller: App\Controller\ProductController::getProducts
+    methods: ['GET']
+
+getProducts:
+    path: /catalog/products
+    controller: App\Controller\ProductController::getProducts
+    methods: ['GET']
 
 showProduct:
     path: /catalog/product/{id}
-    controller: App\Controller\ProductController::showProduct
+    controller: App\Controller\ProductController::getSingleProduct
+    methods: ['GET']
 
 createProduct:
     path: /catalog/createProduct
     controller: App\Controller\ProductController::createProduct
-    
+    methods: ['GET', 'POST']
 
 updateProduct:
     path: /catalog/updateProduct/{id}
@@ -26,3 +33,4 @@ updateProduct:
 deleteProduct:
     path: /catalog/deleteProduct/{id}
     controller: App\Controller\ProductController::deleteProduct
+    methods: ['GET', 'DELETE']

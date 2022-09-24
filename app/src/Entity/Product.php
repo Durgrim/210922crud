@@ -46,7 +46,7 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="weight", type="decimal", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="weight", type="decimal", precision=10, scale=2, nullable=false)
      */
     private $weight;
 

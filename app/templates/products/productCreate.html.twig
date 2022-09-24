@@ -17,9 +17,20 @@
             {{ form_row(formProduct.description)}}
         </div>
         <div class="form-group col-lg-4">
-            {{ form_row(formProduct.weight)}}
+            {{ form_label(formProduct.weight) }}
+            {{ form_widget(formProduct.weight) }}
+            {% if form_errors(formProduct.weight)|length > 0 %}
+                <div class="alert alert-danger">
+                    {{ form_errors(formProduct.weight) }}
+                </div>
+            {% endif %}
         </div>
-
-        {{ form_row(formProduct.submit)}}<a href="{{ path('getProducts') }}" class="btn btn-warning">Cancel</a>
+        <div class="form-group col-lg-4">
+            {{ form_row(formProduct.enabled)}}
+        </div>
+        <div class="d-inline">
+            {{ form_row(formProduct.submit, {'method': 'POST'})}}<a href="{{ path('getProducts') }}" class="btn btn-warning">Cancel</a>
+        </div>
     {{ form_end(formProduct) }}
+
 {% endblock %}

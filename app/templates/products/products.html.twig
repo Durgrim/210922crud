@@ -5,29 +5,34 @@
 {% endblock %}
 
 {% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
     <h1>Products list</h1>
-     <a href="{{ path('createProduct') }}" class="btn btn-primary">Create Product</a>
+    <a href="{{ path('createProduct') }}" class="btn btn-primary">Create Product</a>
+    <input class="form-control " id="search" type="text">
     <table>
         <thead>
             <tr>
                 <th>#</th>
                 <th>Product Type</th>
                 <th>Name</th>
-                <th>Description</th>
-                <th>Weight</th>
-                <th>Enabled</th>
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="productsTable">
             {% for product in listProducts %}
                 <tr>
                     <td>{{ product.uuid }}</td>
                     <td>{{ product.productType }}</td>
                     <td>{{ product.name }}</td>
-                    <td>{{ product.description }}</td>
-                    <td>{{ product.weight }}</td>
-                    <td>{{ product.enabled }}</td>
                     {% if product.enabled %}
                         <td>
                             <a href='{{ path('showProduct', {'id': product.uuid}) }}' class="btn btn-primary">See product information</a>
@@ -35,8 +40,19 @@
                             <a href='{{ path('deleteProduct', {'id': product.uuid}) }}' class="btn btn-danger">Delete</a>
                         </td>
                     {% endif %}
+                    {% if product.enabled == 0%}
+                        <td>
+                            <a href='{{ path('showProduct', {'id': product.uuid}) }}' class="btn btn-secondary disabled" >See product information</a>
+                            <a href='{{ path('updateProduct', {'id': product.uuid}) }}' class="btn btn-secondary disabled">Modify</a>
+                            <a href='{{ path('deleteProduct', {'id': product.uuid}) }}' class="btn btn-danger">Delete</a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('/assets/js/filter.js') }}"></script>
 {% endblock %}
