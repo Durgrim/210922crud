@@ -53,9 +53,13 @@ class ProductType extends AbstractType
                 ]
             ])
             ->add('enabled', ChoiceType::class, [
+                'label' => 'Enabled:      ',
                 'choices' => [
-                    'Active' => 1,
-                    'Inactive' => 0
+                    ' Active' => 1,
+                    ' Inactive' => 0
+                ],
+                'attr' => [
+                    'class' => 'form-select',
                 ]
             ])
             ->add('submit', SubmitType::class, [
