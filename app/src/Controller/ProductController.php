@@ -18,6 +18,8 @@ class ProductController extends AbstractController {
     public function getProducts(ManagerRegistry $doctrine): Response {
         $entityManager = $doctrine->getManager();
         $listProducts = $entityManager->getRepository(Product::class)->findAll();
+        $response = new Response();
+        $response ->setStatusCode(200);
         return $this->render('products/products.html.twig', [
             'listProducts' => $listProducts,
         ]);
@@ -27,12 +29,18 @@ class ProductController extends AbstractController {
         $entityManager = $doctrine->getManager();
         $product = $entityManager->getRepository(Product::class)->find($id);
         if(!$product){
+            $response = new Response();
+            $response ->setStatusCode(404);
             $this->addFlash('error', "The product doesn't exist");
             return $this->redirectToRoute('getProducts');
         } elseif(!$product->isEnabled()){
+            $response = new Response();
+            $response ->setStatusCode(401);
             $this->addFlash('error', 'The product is not active, full information cannot be accessed');
             return $this->redirectToRoute('getProducts');
         } else {
+            $response = new Response();
+            $response ->setStatusCode(200);
             return $this->render('products/singleProduct.html.twig', [
                 'product' => $product,
             ]);
@@ -47,9 +55,13 @@ class ProductController extends AbstractController {
         if($formProduct->isSubmitted() && $formProduct->isValid()){
             $entityManager->persist($product);
             $entityManager->flush();
+            $response = new Response();
+            $response ->setStatusCode(200);
             $this->addFlash('success', 'The product had been created');
             return $this->redirectToRoute('getProducts');
         }
+        $response = new Response();
+        $response ->setStatusCode(200);
         return $this->render('products/productCreate.html.twig', [
             'formProduct' => $formProduct->createView(),
         ]);
@@ -59,19 +71,27 @@ class ProductController extends AbstractController {
         $entityManager = $doctrine->getManager();
         $product = $entityManager->getRepository(Product::class)->find($id);
         if(!$product){
+            $response = new Response();
+            $response ->setStatusCode(404);
             $this->addFlash('error', "The product doesn't exist");
             return $this->redirectToRoute('getProducts');
         } elseif(!$product->isEnabled()){
+            $response = new Response();
+            $response ->setStatusCode(401);
             $this->addFlash('error', 'The product is not active, cannot be modified');
             return $this->redirectToRoute('getProducts');
         } else {
             $formProduct = $this->createForm(\App\Form\ProductType::class, $product);
             $formProduct->handleRequest($request);
             if($formProduct->isSubmitted() && $formProduct->isValid()){
+                $response = new Response();
+                $response ->setStatusCode(200);
                 $entityManager->flush();
                 $this->addFlash('success', 'The product had been updated');
                 return $this->redirectToRoute('getProducts');
             }
+            $response = new Response();
+            $response ->setStatusCode(200);
             return $this->render('products/productUpdate.html.twig', [
                 'formProduct' => $formProduct->createView(),
                 'product' => $product,
@@ -83,9 +103,13 @@ class ProductController extends AbstractController {
         $entityManager = $doctrine->getManager();
         $product = $entityManager->getRepository(Product::class)->find($id);
         if(!$product){
+            $response = new Response();
+            $response ->setStatusCode(404);
             $this->addFlash('error', 'The product do not exist.');
             return $this->redirectToRoute('getProducts');
         } else {
+            $response = new Response();
+            $response ->setStatusCode(200);
             $entityManager->remove($product);
             $entityManager->flush();
             $this->addFlash('success', 'The product had been deleted');
